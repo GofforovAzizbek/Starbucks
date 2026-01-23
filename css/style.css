@@ -300,13 +300,13 @@ button:hover {
 }
 
 /* @keyframes moveCup {
-  0% {
-    transform: none;
-  }
-  
-  100% {
-    transform: translateY(-20px);
-  }
+0% {
+transform: none;
+}
+
+100% {
+transform: translateY(-20px);
+}
 } */
 
 
@@ -1741,14 +1741,6 @@ border-radius: 30px;
 
 
 
-
-
-
-
-
-
-
-/* Burger button */
 .burger {
   display: none;
   flex-direction: column;
@@ -1765,28 +1757,42 @@ border-radius: 30px;
   display: block;
 }
 
-/* Mobile */
 @media (max-width: 768px) {
   .header .container {
     position: relative;
   }
-
+  
   .burger {
     display: flex;
-  }
-
-  .header__nav {
     position: absolute;
-    top: 70px;
-    right: 0;
-    background: #000;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    display: none;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
   }
-
+  
+  .header__nav {
+    position: fixed;
+    inset: 0; 
+    background: #00000077;
+    backdrop-filter: blur(10px);
+    
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    gap: 30px;
+    z-index: 1000;
+  }
+  
   .header__nav.active {
     display: flex;
   }
+  
+  .header__nav .header__link {
+    font-size: 24px;
+  }
 }
+
+
