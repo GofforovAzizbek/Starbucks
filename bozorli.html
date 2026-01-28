@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h2>Bozor ro'yxati</h2>
+    
+    <input type="text" id="itemInput" placeholder="Mahsulot nomi">
+    <button onclick="addItem()">Qo‘sh</button>
+    
+    <ol id="list"></ol>
+    
+    <script>
+        let list = document.getElementById("list");
+        let items = JSON.parse(localStorage.getItem("bozor")) || [];
+        
+        function renderList() {
+            list.innerHTML = "";
+            items.forEach(item => {
+                let li = document.createElement("li");
+                li.textContent = item;
+                list.appendChild(li);
+            });
+        }
+        
+        function addItem() {
+            let input = document.getElementById("itemInput");
+            let value = input.value.trim();                
+            items.push(value);
+            localStorage.setItem("bozor", JSON.stringify(items));
+            
+            input.value = "";
+            renderList();
+        }
+        
+        renderList();
+    </script>
+    
+</body>
+</html>

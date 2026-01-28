@@ -1788,6 +1788,7 @@ border-radius: 30px;
   
   .header__nav.active {
     display: flex;
+    text-align: center;
   }
   
   .header__nav .header__link {

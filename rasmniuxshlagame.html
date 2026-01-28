@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .cell {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        img {
+            width: 70px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h2>Rasmni ushla!</h2>
+    <p>Score: <span id="score">0</span></p>
+    
+    <div class="board" id="board"></div>
+    
+    <script>
+        const board = document.getElementById("board");
+        const scoreEl = document.getElementById("score");
+        
+        let score = localStorage.getItem("score") || 0;
+        scoreEl.textContent = score;
+        
+        for (let i = 0; i < 9; i++) {
+            const div = document.createElement("div");
+            div.className = "cell";
+            board.appendChild(div);
+        }
+        
+        let activeIndex = null;
+        let gameOver = false;
+        
+        function showRandomImage() {
+            if (gameOver) return;
+            
+            document.querySelectorAll(".cell").forEach(c => c.innerHTML = "");
+            
+            activeIndex = Math.floor(Math.random() * 9);
+            
+            const img = document.createElement("img");
+            img.src = "https://cdn-icons-png.flaticon.com/512/616/616408.png";
+            img.dataset.target = "true";
+            
+            board.children[activeIndex].appendChild(img);
+        }
+        
+        board.addEventListener("click", function (e) {
+            if (gameOver) return;
+            
+            if (e.target.dataset.target) {
+                score++;
+                localStorage.setItem("score", score);
+                scoreEl.textContent = score;
+                e.target.remove();
+            } 
+            else {
+                gameOver = true;
+                alert("Xato katak tanlandi");
+            }
+        });
+        
+        showRandomImage();
+        setInterval(showRandomImage, 2000);
+    </script>
+    
+    
+</body>
+</html>
